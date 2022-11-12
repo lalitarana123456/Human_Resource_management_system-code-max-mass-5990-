@@ -7,22 +7,19 @@ public interface EmployeeDao {
 	
 	public String EmployeeRegistration(EmployeeDTO emp);
 	
-//	public EmployeeDTO EmployeeLogin(String email,String password);
-//	
-// 	public EmployeeDTO ViewProfile(int emplid);
-// 	
-// 	public String UpdateProfile();
-// 	
-// 	public String UpdateName(String name);
-// 	
-// 	public String UpdateEmail(String email);
-// 	
-// 	public String UpdateMobileNumber(String phone);
-// 	
-// 	public String UpdatePassword(String password);
-// 	
-// 	public String ApplyLeave(LeaveDTO leave);
-//	
-//	public String insertEmployeeDetails(EmployeeDTO emp)throws EmployeeException;
+	public EmployeeDTO EmployeeLogin(String email,String password)throws EmployeeException;
+	
+ 	public EmployeeDTO ViewProfile(int emplid)throws EmployeeException;
+ 	
+ 	public String UpdateByName(String name,String newname)throws EmployeeException;
+ 	
+ 	public String UpdateByEmail(int empid,String email)throws EmployeeException;
+ 	
+ 	public String UpdateByPassword(int empid,String pass)throws EmployeeException;
+ 	
+ 	public String UpdateByMobile(int empid,String phone)throws EmployeeException;
+
+ 	
+	
 
 }
