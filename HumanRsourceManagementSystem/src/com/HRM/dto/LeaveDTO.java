@@ -4,15 +4,16 @@ import java.sql.Date;
 
 public class LeaveDTO {
 	
-	private Date from;
+	private String from;
 	private int totalday;
 	private int empid;
+	private String status = "pending";
 	
 	
-	public Date getFrom() {
+	public String getFrom() {
 		return from;
 	}
-	public void setFrom(Date from) {
+	public void setFrom(String from) {
 		this.from = from;
 	}
 	public int getTotalday() {
@@ -24,10 +25,17 @@ public class LeaveDTO {
 	public int getEmpid() {
 		return empid;
 	}
+	
 	public void setEmpid(int empid) {
 		this.empid = empid;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public LeaveDTO() {
 		
 	}
