@@ -15,16 +15,41 @@ aphone varchar(12) not null,
 apassword varchar(6) unique not null
 );
 
+mysql> desc admin;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| aid       | int         | NO   | PRI | NULL    |       |
+| aname     | varchar(10) | NO   |     | NULL    |       |
+| aemail    | varchar(30) | NO   |     | NULL    |       |
+| aphone    | varchar(12) | NO   |     | NULL    |       |
+| apassword | varchar(6)  | NO   | UNI | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+5 rows in set (0.25 sec)
+
 
 create table employee
 (
 eid int primary key,
 ename varchar(15) not null,
 eemail varchar(20) not null,
-epassword varchar(6) unique not null,
+epassword varchar(8) unique not null,
 emobile varchar(12),
 esalary int not null
 );
+
+mysql> desc employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| eid       | int         | NO   | PRI | NULL    |       |
+| ename     | varchar(15) | NO   |     | NULL    |       |
+| eemail    | varchar(20) | NO   |     | NULL    |       |
+| epassword | varchar(8)  | NO   | UNI | NULL    |       |
+| emobile   | varchar(12) | YES  |     | NULL    |       |
+| esalary   | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
 
 
 create table department
@@ -34,11 +59,92 @@ dname varchar(20) not null,
 ddesc varchar(12) 
 );
 
+mysql> desc department;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| did   | int         | NO   | PRI | NULL    |       |
+| dname | varchar(20) | NO   |     | NULL    |       |
+| ddesc | varchar(12) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
 
 create table salary 
 (
-salary int not null,
-sdate varchar(20) not null,
-sid int primary key
+sid int primary key,
+salary double not null,
+sdate varchar(20) not null
 );
 
+mysql> desc salary;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int         | NO   | PRI | NULL    |       |
+| salary | double      | NO   |     | NULL    |       |
+| sdate  | varchar(20) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+mysql> create table leaves
+    -> (
+    -> fromdate varchar(20),
+    -> totalday int,
+    -> empid int,
+    -> FOREIGN KEY(empid) references employee(eid)
+    -> );
+Query OK, 0 rows affected (1.19 sec)
+
+===========================================================
+
+mysql> alter table department modify ddesc varchar(50);
+Query OK, 0 rows affected (0.78 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| did   | int         | NO   | PRI | NULL    |       |
+| dname | varchar(20) | NO   |     | NULL    |       |
+| ddesc | varchar(50) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.11 sec)
+
+
+mysql> desc leaves;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| fromdate | date | YES  |     | NULL    |       |
+| totalday | int  | YES  |     | NULL    |       |
+| empid    | int  | YES  | MUL | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.68 sec)
+
+mysql> alter table leaves ADD dpid int;
+Query OK, 0 rows affected (0.73 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc leaves;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| fromdate | date | YES  |     | NULL    |       |
+| totalday | int  | YES  |     | NULL    |       |
+| empid    | int  | YES  | MUL | NULL    |       |
+| dpid     | int  | YES  |     | NULL    |       |
++----------+------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+
+create table leaves
+ (
+ empid int,
+ fromdate date not null,
+ totalday int not null,
+ status varchar(20),
+ foreign key(empid) references employee(eid)
+ );
