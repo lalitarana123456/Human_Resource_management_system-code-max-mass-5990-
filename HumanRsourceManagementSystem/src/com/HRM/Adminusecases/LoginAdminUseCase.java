@@ -26,7 +26,14 @@ public class LoginAdminUseCase {
 		try {
 			AdminDTO admin = ad.AdminLogin(e, p);
 			
-			System.out.println(admin);
+			
+			System.out.println(admin.getAdminId());
+			System.out.println(admin.getAname());
+			System.out.println(admin.getEmail());
+			System.out.println(admin.getPhone());
+			System.out.println(admin.getPassword());
+			
+			
 		} catch (AdminException e1) {
 			
 			e1.printStackTrace();

@@ -12,12 +12,12 @@ public interface DepartmentDao {
 	
 	public List<DepartmentDTO> showDepartments()throws DepartmentException;
 	
-	public String UpdateDepartmentNameById(int id)throws DepartmentException;
+	public String UpdateDepartmentNameById(int id , String newname)throws DepartmentException;
 	
-	public String UpdateDepartmentDescriptionById(int id)throws DepartmentException;
+	public String UpdateDepartmentDescriptionById(int id,String desc)throws DepartmentException;
 	
-	public String UpdateDepartmentNameAndDepDescriptionByName(String name)throws DepartmentException;
+	public String UpdateDepartmentNameAndDepDescriptionByName(String name,String desc,int depid)throws DepartmentException;
 
-	public String TransferToDepartment()throws DepartmentException;
+	public String TransferToDepartment(String dname,int id)throws DepartmentException;
 
 }

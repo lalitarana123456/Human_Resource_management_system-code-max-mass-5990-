@@ -21,18 +21,15 @@ public class LeaveDaoImpl implements LeaveDao{
 		String msg = "Leave process fail..";
 		try(Connection conn = DBUtility.ProvideConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("insert into leaves values(?,?,?)");
-			
+			PreparedStatement ps = conn.prepareStatement("insert into leaves values(?,?,?,?)");
+			ps.setInt(1, leave.getEmpid());
+			ps.setString(2, leave.getFrom());
+			ps.setInt(3, leave.getTotalday());
+			ps.setString(4, "pending");
 			
 			int x = ps.executeUpdate();
-			ps.setDate(1, leave.getFrom());
-			ps.setInt(2, leave.getTotalday());
-			ps.setInt(3, leave.getEmpid());
-			ps.setString(4, "pending..");
-			
-			
-			
-			
+
+					
 			if(x>0) {
 				msg = "leave applied successfully..";
 			}
@@ -57,6 +54,7 @@ public class LeaveDaoImpl implements LeaveDao{
 			
 			
 			PreparedStatement ps = conn.prepareStatement("select status from leaves where empid=? ");
+			ps.setInt(1, eid);
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -83,6 +81,7 @@ public class LeaveDaoImpl implements LeaveDao{
 		try(Connection conn = DBUtility.ProvideConnection()){
 			
 			PreparedStatement ps = conn.prepareStatement("select status from leaves where status=?");
+			ps.setString(1, "pending");
 			ResultSet rs = ps.executeQuery();
 			
 			
@@ -116,6 +115,8 @@ public class LeaveDaoImpl implements LeaveDao{
 		try(Connection conn = DBUtility.ProvideConnection()){
 			
 			PreparedStatement ps = conn.prepareStatement("Update leaves set status=? where status=?");
+			ps.setString(1, update);
+			ps.setString(2, "pending");
 			int x = ps.executeUpdate();
 			
 			

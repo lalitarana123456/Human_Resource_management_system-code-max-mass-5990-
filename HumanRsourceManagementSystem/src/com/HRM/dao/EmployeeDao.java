@@ -11,7 +11,7 @@ public interface EmployeeDao {
 	
  	public EmployeeDTO ViewProfile(int emplid)throws EmployeeException;
  	
- 	public String UpdateByName(String name,String newname)throws EmployeeException;
+ 	public String UpdateByName(int id,String newname)throws EmployeeException;
  	
  	public String UpdateByEmail(int empid,String email)throws EmployeeException;
  	

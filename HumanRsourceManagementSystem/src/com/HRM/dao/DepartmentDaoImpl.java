@@ -78,15 +78,26 @@ public class DepartmentDaoImpl implements DepartmentDao{
 	}
 
 	@Override
-	public String UpdateDepartmentNameById(int id) throws DepartmentException {
+	public String UpdateDepartmentNameById(int id, String newname) throws DepartmentException {
         String msg = "Updation fail..";
 		
 		try(Connection conn = DBUtility.ProvideConnection()){
 			
-			PreparedStatement ps = conn.prepareStatement("UPDATE department SET did=? where did=?");
+			PreparedStatement ps = conn.prepareStatement("UPDATE department SET dname=? where did=?");
+			ps.setString(1, newname);
+			ps.setInt(2, id);
 		    int x = ps.executeUpdate();
 		    
+		    if(x>0) {
+		    	msg  = "successfully updated ..";
+		    	
+		    }else {
+		    	throw new DepartmentException("not found.");
+		    }
+		    
 		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new DepartmentException(e.getMessage());
 			
 		}
 		
@@ -95,21 +106,88 @@ public class DepartmentDaoImpl implements DepartmentDao{
 	}
 
 	@Override
-	public String UpdateDepartmentDescriptionById(int id) throws DepartmentException {
-		// TODO Auto-generated method stub
-		return null;
+	public String UpdateDepartmentDescriptionById(int id,String desc) throws DepartmentException {
+        String msg = "Updation fail..";
+		
+		try(Connection conn = DBUtility.ProvideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE department SET ddesc=? where did=?");
+			ps.setString(1, desc);
+			ps.setInt(2, id);
+		    int x = ps.executeUpdate();
+		    
+		    if(x>0) {
+		    	msg  = "successfully updated ..";
+		    	
+		    }else {
+		    	throw new DepartmentException("not found.");
+		    }
+		    
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new DepartmentException(e.getMessage());
+			
+		}
+		
+		
+		return msg;
 	}
 
 	@Override
-	public String UpdateDepartmentNameAndDepDescriptionByName(String name) throws DepartmentException {
-		// TODO Auto-generated method stub
-		return null;
+	public String UpdateDepartmentNameAndDepDescriptionByName(String name,String desc, int depid) throws DepartmentException {
+        String msg = "Updation fail..";
+		
+		try(Connection conn = DBUtility.ProvideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE department SET dname=?,ddesc=? where did=?");
+			ps.setString(1, name);
+			ps.setString(1, desc);
+			ps.setInt(2, depid);
+		    int x = ps.executeUpdate();
+		    
+		    if(x>0) {
+		    	msg  = "successfully updated ..";
+		    	
+		    }else {
+		    	throw new DepartmentException("not found.");
+		    }
+		    
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new DepartmentException(e.getMessage());
+			
+		}
+		
+		
+		return msg;
 	}
 
 	@Override
-	public String TransferToDepartment() throws DepartmentException {
-		// TODO Auto-generated method stub
-		return null;
+	public String TransferToDepartment(String dname,int id) throws DepartmentException {
+        String msg = "Updation fail..";
+		
+		try(Connection conn = DBUtility.ProvideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("UPDATE department SET dname=? where did=?");
+			ps.setString(1, dname);
+			ps.setInt(2, id);
+		    int x = ps.executeUpdate();
+		    
+		    if(x>0) {
+		    	msg  = "successfully updated ..";
+		    	
+		    }else {
+		    	throw new DepartmentException("not found.");
+		    }
+		    
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new DepartmentException(e.getMessage());
+			
+		}
+		
+		
+		return msg;
 	}
 
 }

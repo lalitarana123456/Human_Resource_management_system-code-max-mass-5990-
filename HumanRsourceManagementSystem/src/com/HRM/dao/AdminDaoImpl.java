@@ -10,11 +10,7 @@ import com.HRM.exception.AdminException;
 import com.HRM.utility.DBUtility;
 
 
-//try(Connection conn = DBUtility.ProvideConnection()){
-//	
-//}catch (SQLException e) {
-//	
-//}
+
 
 public class AdminDaoImpl implements AdminDao{
 
@@ -37,9 +33,9 @@ public class AdminDaoImpl implements AdminDao{
 				AdminDTO admin  = new AdminDTO();
 				admin.setAdminId(rs.getInt("aid"));
 				admin.setAname(rs.getString("aname"));
-				admin.setAname(rs.getString("aemail"));
-				admin.setAname(rs.getString("aphone"));
-				admin.setAname(rs.getString("apassword"));
+				admin.setEmail(rs.getString("aemail"));
+				admin.setPhone(rs.getString("aphone"));
+				admin.setPassword(rs.getString("apassword"));
 				
 				
 				ad = admin;

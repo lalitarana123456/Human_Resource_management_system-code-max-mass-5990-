@@ -119,14 +119,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public String UpdateByName(String name, String newname) throws EmployeeException {
+	public String UpdateByName(int id, String newname) throws EmployeeException {
 		String msg = "Name Updation fail..";
 		
 	    try (Connection conn = DBUtility.ProvideConnection()){
 			
-	    	PreparedStatement ps = conn.prepareStatement("UPDATE employee set ename=? where ename=?");
-	    	ps.setString(1, newname);
-	    	ps.setString(2, name);
+	    	PreparedStatement ps = conn.prepareStatement("UPDATE employee set eid=? where ename=?");
+	    	ps.setInt(1, id);
+	    	ps.setString(2, newname);
 	    	
 	    	int x = ps.executeUpdate();
 	    	if(x>0) {
